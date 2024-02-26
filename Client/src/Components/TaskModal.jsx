@@ -1,8 +1,7 @@
-// TaskModal.jsx
-
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./TaskModal.module.css";
 import deleteIcon from "../assets/deleteIcon.svg";
+import addNewIcon from "../assets/addNewIcon.svg";
 
 const TaskModal = ({ isOpen, onClose, onAddTask }) => {
   const [taskName, setTaskName] = useState("");
@@ -104,9 +103,9 @@ const TaskModal = ({ isOpen, onClose, onAddTask }) => {
                 </div>
               </div>
             </div>
-            <div>
+            <div className={styles.checklistContainer}>
               <label htmlFor="checklist">Checklist:</label>
-              <div id="checklist">
+              <div className={styles.checklist}>
                 {checklistItems.map((item, index) => (
                   <div className={styles.checklistItem} key={index}>
                     <input
@@ -130,13 +129,25 @@ const TaskModal = ({ isOpen, onClose, onAddTask }) => {
                   </div>
                 ))}
               </div>
-              <button onClick={handleAddChecklistItem}>
-                Add Checklist Item
-              </button>
+              <div
+                onClick={handleAddChecklistItem}
+                className={styles.addNewBtn}
+              >
+                <img src={addNewIcon} alt="" />
+                Add New
+              </div>
             </div>
-            <div>
-              <button onClick={handleAddTask}>Save</button>
-              <button onClick={onClose}>Cancel</button>
+            <div className={styles.btnContainer}>
+              <button onClick={handleAddTask} className={styles.dateBtn}>
+                Select Due Date
+              </button>
+              <button onClick={onClose} className={styles.cancelBtn}>
+                Cancel
+              </button>
+
+              <button onClick={handleAddTask} className={styles.saveBtn}>
+                Save
+              </button>
             </div>
           </div>
         </div>

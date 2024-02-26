@@ -35,7 +35,8 @@
   width: 600px;
   height: 44px;
   padding: 10px 16px 10px 16px;
-  font-size: 24px;
+  font-size: 16px;
+  line-height: 20px;
   border-radius: 4px;
   margin-bottom: 10px;
   border: 1px solid #e2e2e2;
@@ -45,28 +46,54 @@
   margin-right: 10px;
 }
 
-#checklist {
-  padding: 0;
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  height: 225px;
+  overflow: scroll;
 }
 
 .checklistItem {
   display: flex;
   align-items: center;
   border: 1px solid #e2e2e2;
+  padding: 12px;
+  border-radius: 8px;
+  gap: 10px;
+}
+.checklistItem input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  border-radius: 6px;
+  border: 2px solid #e2e2e2; /* Border when unchecked */
+  background: none; /* No background by default */
+  transition: background-color 0.3s; /* Smooth transition for background color change */
+  appearance: none; /* Remove default browser styling */
 }
 
-.checklistItem input[type="checkbox"] {
-  margin-right: 10px;
+/* Checked checkbox styles */
+.checklistItem input[type="checkbox"]:checked {
+  background: #17a2b8 url("../assets/checked.svg") no-repeat;
+  background-position: 50% 50%;
+  border-color: transparent; /* Remove border when checked */
 }
 
 .checklistItem input[type="text"] {
   border: none; /* Remove default border */
   background: transparent; /* Transparent background */
   flex: 1; /* Fill remaining space */
-  padding: 0; /* Remove padding */
-  margin-right: 10px; /* Add some spacing */
+  padding: 0px; /* Remove padding */
   outline: none; /* Remove outline */
-  font-size: 14px; /* Adjust font size */
+  font-size: 16px; /* Adjust font size */
+  margin: 0px;
+  line-height: 20px;
+  height: 20px;
+  width: 500px;
 }
 
 .deleteIcon {
@@ -74,8 +101,45 @@
   cursor: pointer;
 }
 
+.addNewBtn {
+  cursor: pointer;
+  background-color: transparent;
+  color: #767575;
+}
+
+.btnContainer {
+  margin-top: 100px;
+  font-size: 16px;
+}
+
+.cancelBtn {
+  background-color: transparent;
+  color: red;
+  border: 1px solid red;
+  border-radius: 12px;
+  padding: 10px 50px 10px 50px;
+  margin-left: 65px;
+}
+
+.dateBtn {
+  background-color: transparent;
+  color: #767575;
+  border: 1px solid #e2e2e2;
+  border-radius: 12px;
+  padding: 10px 50px 10px 50px;
+  margin-right: 65px;
+}
+.saveBtn {
+  background-color: #17a2b8;
+  color: white;
+  border: 1px solid #17a2b8;
+  border-radius: 12px;
+  padding: 10px 50px 10px 50px;
+}
+
 .priorityTags {
   display: flex;
+  gap: 12px;
 }
 
 .priorityTag {
@@ -118,6 +182,7 @@
 
 .priorityContainer {
   display: flex;
+  gap: 12px;
 }
 
 .titleContainer {
