@@ -1,0 +1,125 @@
+/* TaskModal.module.css */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+}
+
+.modal h2 {
+  margin-bottom: 10px;
+  color: black;
+}
+
+.modal label {
+  margin-bottom: 5px;
+  color: black;
+}
+
+.modal input[type="text"] {
+  width: 600px;
+  height: 44px;
+  padding: 10px 16px 10px 16px;
+  font-size: 24px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  border: 1px solid #e2e2e2;
+}
+
+.modal button {
+  margin-right: 10px;
+}
+
+#checklist {
+  padding: 0;
+}
+
+.checklistItem {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e2e2e2;
+}
+
+.checklistItem input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.checklistItem input[type="text"] {
+  border: none; /* Remove default border */
+  background: transparent; /* Transparent background */
+  flex: 1; /* Fill remaining space */
+  padding: 0; /* Remove padding */
+  margin-right: 10px; /* Add some spacing */
+  outline: none; /* Remove outline */
+  font-size: 14px; /* Adjust font size */
+}
+
+.deleteIcon {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.priorityTags {
+  display: flex;
+}
+
+.priorityTag {
+  padding: 5px 10px 5px 10px;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  margin-right: 5px;
+  gap: 8px;
+  cursor: pointer;
+  color: #767575;
+}
+
+.priorityTag.active {
+  background-color: #eeecec;
+  color: #767575;
+}
+
+/* PriorityDot.css */
+
+.priorityDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+/* Customize colors based on priority */
+.high {
+  background-color: red;
+}
+
+.medium {
+  background-color: yellow;
+}
+
+.low {
+  background-color: green;
+}
+
+.priorityContainer {
+  display: flex;
+}
+
+.titleContainer {
+  display: flex;
+}

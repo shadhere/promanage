@@ -5,6 +5,7 @@ import RegisterPage from "./Pages/Register.jsx";
 import PrivateRoute from "./Components/PrivateRoute.jsx";
 import { AuthProvider } from "./Contexts/auth.jsx";
 import Settings from "./Pages/Settings.jsx";
+import Analytics from "./Pages/Analytics.jsx";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route exact path="/" element={<PrivateRoute />}>
             <Route exact path="/" element={<Home />} />
+            <Route exact path="/Analytics" element={<Analytics />} />
             <Route exact path="/Settings" element={<Settings />} />
           </Route>{" "}
         </Routes>

@@ -24,11 +24,11 @@ const Sidebar = () => {
       <nav>
         <div>
           <img src={boardIcon} alt="Home" />
-          <a href="#">Board</a>
+          <Link to="/">Board</Link>
         </div>
         <div>
           <img src={databaseIcon} alt="Profile" />
-          <a href="#">Analytics</a>
+          <Link to="/analytics">Analytics</Link>
         </div>
         <div>
           <img src={settingsIcon} alt="Login" />
