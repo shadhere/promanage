@@ -1,9 +1,8 @@
-// KanbanBoard.jsx
-
 import { useState } from "react";
 import styles from "./Kanban.module.css";
 import collapseAllIcon from "../assets/collapseAllIcon.svg";
 import addTaskIcon from "../assets/addTaskIcon.svg";
+import ModernCard from "./ModernCard"; // Import the ModernCard component
 import TaskModal from "./TaskModal"; // Import the modal component
 
 const Kanban = () => {
@@ -33,8 +32,7 @@ const Kanban = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const handleAddTask = (status) => {
-    const taskName = prompt("Enter task name:");
+  const handleAddTask = (status, taskName) => {
     if (taskName) {
       const newTask = {
         id: Date.now(),
@@ -62,10 +60,11 @@ const Kanban = () => {
           {tasks
             .filter((task) => task.status === "backlog")
             .map((task) => (
-              <div key={task.id} className={styles.task}>
-                <h3 className={styles.taskTitle}>{task.title}</h3>
-                <p className={styles.taskDescription}>{task.description}</p>
-              </div>
+              <ModernCard
+                key={task.id}
+                title={task.title}
+                description={task.description}
+              />
             ))}
         </div>
         <button
@@ -92,10 +91,11 @@ const Kanban = () => {
           {tasks
             .filter((task) => task.status === "todo")
             .map((task) => (
-              <div key={task.id} className={styles.task}>
-                <h3 className={styles.taskTitle}>{task.title}</h3>
-                <p className={styles.taskDescription}>{task.description}</p>
-              </div>
+              <ModernCard
+                key={task.id}
+                title={task.title}
+                description={task.description}
+              />
             ))}
         </div>
         <button
@@ -118,10 +118,11 @@ const Kanban = () => {
           {tasks
             .filter((task) => task.status === "inProgress")
             .map((task) => (
-              <div key={task.id} className={styles.task}>
-                <h3 className={styles.taskTitle}>{task.title}</h3>
-                <p className={styles.taskDescription}>{task.description}</p>
-              </div>
+              <ModernCard
+                key={task.id}
+                title={task.title}
+                description={task.description}
+              />
             ))}
         </div>
         <button
@@ -144,10 +145,11 @@ const Kanban = () => {
           {tasks
             .filter((task) => task.status === "done")
             .map((task) => (
-              <div key={task.id} className={styles.task}>
-                <h3 className={styles.taskTitle}>{task.title}</h3>
-                <p className={styles.taskDescription}>{task.description}</p>
-              </div>
+              <ModernCard
+                key={task.id}
+                title={task.title}
+                description={task.description}
+              />
             ))}
         </div>
         <button

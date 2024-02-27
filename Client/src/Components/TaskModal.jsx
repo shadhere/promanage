@@ -4,6 +4,7 @@ import deleteIcon from "../assets/deleteIcon.svg";
 import addNewIcon from "../assets/addNewIcon.svg";
 import DatePicker from "react-datepicker"; // Import the date picker component
 import "react-datepicker/dist/react-datepicker.css"; // Import the styles for the date picker
+import api from "../Api/api";
 
 const TaskModal = ({ isOpen, onClose, onAddTask }) => {
   const [taskName, setTaskName] = useState("");
@@ -11,20 +12,27 @@ const TaskModal = ({ isOpen, onClose, onAddTask }) => {
   const [checklistItems, setChecklistItems] = useState([]);
   const [dueDate, setDueDate] = useState(null);
 
-  const handleAddTask = () => {
-    if (taskName.trim() !== "") {
+  const handleAddTask = async () => {
+    try {
       const newTask = {
         title: taskName,
         priority: priority,
         checklist: checklistItems,
-        dueDate: dueDate ? dueDate.toLocaleDateString() : null, // Format due date as needed
+        dueDate: dueDate ? dueDate.toLocaleDateString() : null,
       };
-      onAddTask(newTask);
-      setTaskName("");
-      setPriority("low");
-      setChecklistItems([]);
-      setDueDate(null);
-      onClose();
+      const response = await api.post("/task", newTask);
+      if (response.status === 201) {
+        setTaskName("");
+        setPriority("low");
+        setChecklistItems([]);
+        setDueDate(null);
+        onClose();
+        console.log("Task added successfully");
+      } else {
+        console.error("Failed to add task:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error adding task:", error);
     }
   };
 
@@ -150,7 +158,7 @@ const TaskModal = ({ isOpen, onClose, onAddTask }) => {
               <DatePicker
                 selected={dueDate}
                 onChange={setDueDate}
-                dateFormat="MM/dd/yyyy"
+                dateFormat="dd/MM/yyyy"
                 placeholderText="Select due date"
                 className={styles.datePicker} // Add className for styling
               />

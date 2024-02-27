@@ -1,0 +1,32 @@
+.accordion {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.accordionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px;
+  padding-top: 10px;
+  cursor: pointer;
+  color: #000;
+  background-color: #fff;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+  display: none;
+}
+
+.expanded .content {
+  display: block;
+}
