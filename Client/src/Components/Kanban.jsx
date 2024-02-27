@@ -1,47 +1,16 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styles from "./Kanban.module.css";
 import collapseAllIcon from "../assets/collapseAllIcon.svg";
 import addTaskIcon from "../assets/addTaskIcon.svg";
 import ModernCard from "./ModernCard"; // Import the ModernCard component
 import TaskModal from "./TaskModal"; // Import the modal component
 
-const Kanban = () => {
+const Kanban = ({ tasks }) => {
+  // Destructuring tasks from props
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Task 1",
-      description: "Description of Task 1",
-      status: "todo",
-    },
-    {
-      id: 2,
-      title: "Task 2",
-      description: "Description of Task 2",
-      status: "inProgress",
-    },
-    {
-      id: 3,
-      title: "Task 3",
-      description: "Description of Task 3",
-      status: "done",
-    },
-  ]);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
-  };
-
-  const handleAddTask = (status, taskName) => {
-    if (taskName) {
-      const newTask = {
-        id: Date.now(),
-        title: taskName,
-        description: "",
-        status: status,
-      };
-      setTasks((prevTasks) => [...prevTasks, newTask]);
-    }
   };
 
   return (
@@ -61,18 +30,13 @@ const Kanban = () => {
             .filter((task) => task.status === "backlog")
             .map((task) => (
               <ModernCard
-                key={task.id}
+                key={task._id} // Assuming _id is unique for each task
                 title={task.title}
-                description={task.description}
+                priority={task.priority} // Assuming priority is another property of the task
+                description={task.description} // Assuming you have a description property
               />
             ))}
         </div>
-        <button
-          className={styles.addButton}
-          onClick={() => handleAddTask("backlog")}
-        >
-          Add Task
-        </button>
       </div>
       <div className={styles.column}>
         <h2 className={styles.columnTitle}>
@@ -92,18 +56,14 @@ const Kanban = () => {
             .filter((task) => task.status === "todo")
             .map((task) => (
               <ModernCard
-                key={task.id}
+                key={task._id} // Assuming _id is unique for each task
                 title={task.title}
-                description={task.description}
+                priority={task.priority} // Assuming priority is another property of the task
+                description={task.description} // Assuming you have a description property
+                checklist={task.checklist}
               />
             ))}
         </div>
-        <button
-          className={styles.addButton}
-          onClick={() => handleAddTask("todo")}
-        >
-          Add Task
-        </button>
       </div>
       <div className={styles.column}>
         <h2 className={styles.columnTitle}>
@@ -125,12 +85,6 @@ const Kanban = () => {
               />
             ))}
         </div>
-        <button
-          className={styles.addButton}
-          onClick={() => handleAddTask("inProgress")}
-        >
-          Add Task
-        </button>
       </div>
       <div className={styles.column}>
         <h2 className={styles.columnTitle}>
@@ -146,24 +100,15 @@ const Kanban = () => {
             .filter((task) => task.status === "done")
             .map((task) => (
               <ModernCard
-                key={task.id}
+                key={task._id} // Assuming _id is unique for each task
                 title={task.title}
-                description={task.description}
+                priority={task.priority} // Assuming priority is another property of the task
+                description={task.description} // Assuming you have a description property
               />
             ))}
         </div>
-        <button
-          className={styles.addButton}
-          onClick={() => handleAddTask("done")}
-        >
-          Add Task
-        </button>
       </div>
-      <TaskModal
-        isOpen={isModalOpen}
-        onClose={toggleModal}
-        onAddTask={(taskName) => handleAddTask("todo", taskName)}
-      />
+      <TaskModal isOpen={isModalOpen} onClose={toggleModal} />
     </div>
   );
 };

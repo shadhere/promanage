@@ -1,0 +1,47 @@
+/* ChecklistItem.module.css */
+
+.checklistItem {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e2e2e2;
+  padding: 12px;
+  border-radius: 8px;
+  gap: 10px;
+}
+
+.checklistItem input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  border-radius: 6px;
+  border: 2px solid #e2e2e2; /* Border when unchecked */
+  background: none; /* No background by default */
+  transition: background-color 0.3s; /* Smooth transition for background color change */
+  appearance: none; /* Remove default browser styling */
+}
+
+/* Checked checkbox styles */
+.checklistItem input[type="checkbox"]:checked {
+  background: #17a2b8 url("../assets/checked.svg") no-repeat;
+  background-position: 50% 50%;
+  border-color: transparent; /* Remove border when checked */
+}
+
+.checklistItem input[type="text"] {
+  border: none; /* Remove default border */
+  background: transparent; /* Transparent background */
+  flex: 1; /* Fill remaining space */
+  padding: 0px; /* Remove padding */
+  outline: none; /* Remove outline */
+  font-size: 16px; /* Adjust font size */
+  margin: 0px;
+  line-height: 20px;
+  height: 20px;
+  width: 500px;
+}
+
+.deleteIcon {
+  margin-left: 10px;
+  cursor: pointer;
+}

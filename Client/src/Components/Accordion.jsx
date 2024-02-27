@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Accordion.module.css";
 
 const Accordion = ({ title, expanded, onToggle, children }) => {

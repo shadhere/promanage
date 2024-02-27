@@ -25,12 +25,12 @@
   color: black;
 }
 
-.modal label {
+.header label {
   margin-bottom: 5px;
   color: black;
 }
 
-.modal input[type="text"] {
+.header input[type="text"] {
   width: 100%;
   height: 44px;
   padding: 10px 16px 10px 16px;
@@ -41,7 +41,7 @@
   border: 1px solid #e2e2e2;
 }
 
-.modal button {
+.header button {
   margin-right: 10px;
 }
 

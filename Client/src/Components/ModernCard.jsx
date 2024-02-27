@@ -1,8 +1,10 @@
 import { useState } from "react";
 import styles from "./ModernCard.module.css";
 import Accordion from "./Accordion";
+import ChecklistItem from "./ChecklistItem";
 
-const ModernCard = () => {
+const ModernCard = ({ title, priority, checklist }) => {
+  // Destructuring title and priority from props
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleAccordion = () => {
@@ -12,8 +14,9 @@ const ModernCard = () => {
   return (
     <div className={styles.card}>
       <div className={styles.header}>
-        <div className={styles.tag}>Tag</div>
-        <h3 className={styles.title}>Card Title</h3>
+        <div className={styles.priority}>{priority}</div>{" "}
+        {/* Displaying priority */}
+        <h3 className={styles.title}>{title}</h3>
         <div className={styles.menu}>
           {/* Menu with three dots */}
           <div className={styles.menuIcon}></div>
@@ -27,16 +30,9 @@ const ModernCard = () => {
           expanded={isExpanded}
           onToggle={toggleAccordion}
         >
-          {/* Content for the accordion */}
-          <div className={styles.todoItem}>
-            <input type="checkbox" />
-            <span>Task 1</span>
-          </div>
-          <div className={styles.todoItem}>
-            <input type="checkbox" />
-            <span>Task 2</span>
-          </div>
-          {/* Add more tasks as needed */}
+          {checklist.map((item, index) => (
+            <ChecklistItem key={index} item={item} />
+          ))}
         </Accordion>
       </div>
       <div className={styles.footer}>

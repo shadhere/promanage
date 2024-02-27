@@ -1,0 +1,59 @@
+.priorityTags {
+  display: flex;
+  gap: 12px;
+}
+
+.priorityTag {
+  padding: 5px 10px 5px 10px;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  margin-right: 5px;
+  gap: 8px;
+  cursor: pointer;
+  color: #767575;
+}
+
+.priorityTag.active {
+  background-color: #eeecec;
+  color: #767575;
+}
+
+/* PriorityDot.css */
+
+.priorityDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 2px;
+}
+
+/* Customize colors based on priority */
+.high {
+  background-color: red;
+}
+
+.medium {
+  background-color: yellow;
+}
+
+.low {
+  background-color: green;
+}
+
+.priorityContainer {
+  display: flex;
+  gap: 12px;
+  padding: 10px 40px 10px 40px;
+  align-items: center;
+}
+
+.priorityContainer label {
+  margin-bottom: 5px;
+  color: black;
+}
+
+.titleContainer {
+  display: flex;
+}
