@@ -2,11 +2,14 @@ import { useState } from "react";
 import styles from "./TaskModal.module.css";
 import deleteIcon from "../assets/deleteIcon.svg";
 import addNewIcon from "../assets/addNewIcon.svg";
+import DatePicker from "react-datepicker"; // Import the date picker component
+import "react-datepicker/dist/react-datepicker.css"; // Import the styles for the date picker
 
 const TaskModal = ({ isOpen, onClose, onAddTask }) => {
   const [taskName, setTaskName] = useState("");
   const [priority, setPriority] = useState("low");
   const [checklistItems, setChecklistItems] = useState([]);
+  const [dueDate, setDueDate] = useState(null);
 
   const handleAddTask = () => {
     if (taskName.trim() !== "") {
@@ -14,11 +17,13 @@ const TaskModal = ({ isOpen, onClose, onAddTask }) => {
         title: taskName,
         priority: priority,
         checklist: checklistItems,
+        dueDate: dueDate ? dueDate.toLocaleDateString() : null, // Format due date as needed
       };
       onAddTask(newTask);
       setTaskName("");
       setPriority("low");
       setChecklistItems([]);
+      setDueDate(null);
       onClose();
     }
   };
@@ -54,14 +59,16 @@ const TaskModal = ({ isOpen, onClose, onAddTask }) => {
       {isOpen && (
         <div className={styles.overlay}>
           <div className={styles.modal}>
-            <label>Title</label>
-            <input
-              type="text"
-              id="taskName"
-              value={taskName}
-              onChange={(e) => setTaskName(e.target.value)}
-              placeholder="Enter Task Title"
-            />
+            <div className={styles.header}>
+              <label>Title</label>
+              <input
+                type="text"
+                id="taskName"
+                value={taskName}
+                onChange={(e) => setTaskName(e.target.value)}
+                placeholder="Enter Task Title"
+              />
+            </div>
             <div className={styles.priorityContainer}>
               <label>Select Priority</label>
               <div className={styles.priorityTags}>
@@ -105,46 +112,51 @@ const TaskModal = ({ isOpen, onClose, onAddTask }) => {
             </div>
             <div className={styles.checklistContainer}>
               <label htmlFor="checklist">Checklist:</label>
-              <div className={styles.checklist}>
-                {checklistItems.map((item, index) => (
-                  <div className={styles.checklistItem} key={index}>
-                    <input
-                      type="checkbox"
-                      checked={item.completed}
-                      onChange={() => handleChecklistItemChange(index)}
-                    />
-                    <input
-                      type="text"
-                      value={item.text}
-                      onChange={(e) =>
-                        handleChecklistItemInputChange(index, e.target.value)
-                      }
-                      placeholder="Enter checklist item"
-                    />
-                    <img
-                      src={deleteIcon}
-                      className={styles.deleteIcon}
-                      onClick={() => handleDeleteChecklistItem(index)}
-                    ></img>
-                  </div>
-                ))}
+              <div className={styles.checklistItems}>
+                <div className={styles.checklist}>
+                  {checklistItems.map((item, index) => (
+                    <div className={styles.checklistItem} key={index}>
+                      <input
+                        type="checkbox"
+                        checked={item.completed}
+                        onChange={() => handleChecklistItemChange(index)}
+                      />
+                      <input
+                        type="text"
+                        value={item.text}
+                        onChange={(e) =>
+                          handleChecklistItemInputChange(index, e.target.value)
+                        }
+                        placeholder="Enter checklist item"
+                      />
+                      <img
+                        src={deleteIcon}
+                        className={styles.deleteIcon}
+                        onClick={() => handleDeleteChecklistItem(index)}
+                      ></img>
+                    </div>
+                  ))}
+                </div>
               </div>
               <div
                 onClick={handleAddChecklistItem}
                 className={styles.addNewBtn}
               >
-                <img src={addNewIcon} alt="" />
+                <img src={addNewIcon} className={styles.addNewIcon} />
                 Add New
               </div>
             </div>
             <div className={styles.btnContainer}>
-              <button onClick={handleAddTask} className={styles.dateBtn}>
-                Select Due Date
-              </button>
+              <DatePicker
+                selected={dueDate}
+                onChange={setDueDate}
+                dateFormat="MM/dd/yyyy"
+                placeholderText="Select due date"
+                className={styles.datePicker} // Add className for styling
+              />
               <button onClick={onClose} className={styles.cancelBtn}>
                 Cancel
               </button>
-
               <button onClick={handleAddTask} className={styles.saveBtn}>
                 Save
               </button>
