@@ -1,14 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Kanban.module.css";
 import collapseAllIcon from "../assets/collapseAllIcon.svg";
 import addTaskIcon from "../assets/addTaskIcon.svg";
 import ModernCard from "./ModernCard"; // Import the ModernCard component
 import TaskModal from "./TaskModal"; // Import the modal component
+import io from "socket.io-client"; // Import the Socket.IO client library
 
 const Kanban = ({ tasks }) => {
+  const socket = io("http://localhost:5000/");
+
   // Destructuring tasks from props
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log("Connected to server", socket.id);
+    });
+
+    // Listen for the "newTask" event from the server
+    socket.on("newTask", (newTask) => {
+      // Update tasks state with the new task
+      setTasks((prevTasks) => [...prevTasks, newTask]);
+    });
+
+    return () => {
+      // Clean up event listener when component unmounts
+      socket.off("newTask");
+    };
+  }, [socket]);
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
