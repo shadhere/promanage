@@ -1,34 +1,46 @@
 import React, { createContext, useContext, useState } from "react";
 
-// Create a context for managing accordion state
+// Create a context for managing accordion states
 const AccordionContext = createContext();
 
-// Custom hook to use the accordion context
 export const useAccordionContext = () => useContext(AccordionContext);
 
-// Accordion context provider component
-// Accordion context provider component
-// Accordion context provider component
 export const AccordionProvider = ({ children }) => {
+  // State to manage accordion states for all cards
   const [accordionStates, setAccordionStates] = useState({});
 
-  const toggleAccordion = (accordionId) => {
-    setAccordionStates((prevStates) => ({
-      ...prevStates,
-      [accordionId]: !prevStates[accordionId],
+  // Function to toggle accordion states for a specific card
+  const toggleAccordion = (cardId) => {
+    setAccordionStates((prevState) => ({
+      ...prevState,
+      [cardId]: !prevState[cardId],
     }));
   };
 
-  const collapseAll = (board) => {
-    setAccordionStates((prevStates) => ({
-      ...prevStates,
-      [board]: {},
-    }));
+  // Function to collapse all accordions for a specific board
+  const collapseAllForBoard = (boardName) => {
+    const updatedStates = { ...accordionStates };
+    Object.keys(updatedStates).forEach((cardId) => {
+      if (cardId.startsWith(boardName)) {
+        updatedStates[cardId] = false;
+      }
+    });
+    setAccordionStates(updatedStates);
+  };
+
+  // Function to check if accordion is expanded or not
+  const isAccordionExpanded = (cardId) => {
+    return accordionStates[cardId] || false;
   };
 
   return (
     <AccordionContext.Provider
-      value={{ accordionStates, toggleAccordion, collapseAll }}
+      value={{
+        accordionStates,
+        toggleAccordion,
+        collapseAllForBoard,
+        isAccordionExpanded,
+      }}
     >
       {children}
     </AccordionContext.Provider>

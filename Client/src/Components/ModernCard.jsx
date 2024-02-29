@@ -26,11 +26,6 @@ const ModernCard = ({
     }
   };
   // Destructuring title and priority from props
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleAccordion = () => {
-    setIsExpanded(!isExpanded);
-  };
 
   return (
     <div className={styles.card}>
@@ -50,11 +45,7 @@ const ModernCard = ({
       </div>
       <div className={styles.content}>
         <h3 className={styles.title}>{title}</h3>
-        <Accordion
-          title="To Do"
-          expanded={isExpanded}
-          onToggle={toggleAccordion}
-        >
+        <Accordion carrdId={carrdId}>
           {checklist.map((item, index) => (
             <ChecklistItem key={index} item={item} />
           ))}
