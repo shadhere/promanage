@@ -22,8 +22,8 @@ const io = new Server(server, {
 
 app.use(bodyParser.json());
 app.use(cors());
-app.use(auth);
 app.use(settings);
+app.use(auth);
 app.use("/settings", authMiddleware); // Apply authMiddleware only to the /settings route
 app.use("/task", authMiddleware);
 app.use("/tasks", authMiddleware);

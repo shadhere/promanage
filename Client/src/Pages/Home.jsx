@@ -29,31 +29,51 @@ const Home = () => {
 
   useEffect(() => {
     console.log("Component mounted");
+
     // Listen for 'taskUpdated' event from the server
-    socket.on("taskUpdated", (updatedTask) => {
-      // Update the tasks state with the updated task
-      setTasks((prevTasks) => {
-        // Find the index of the updated task in the tasks array
-        const updatedTaskIndex = prevTasks.findIndex(
-          (task) => task.id === updatedTask.id
-        );
-        if (updatedTaskIndex !== -1) {
-          console.log("updatedtask", updatedTask);
-          // If the task is found, update it in the tasks array
-          const updatedTasks = [...prevTasks];
-          updatedTasks[updatedTaskIndex] = updatedTask;
+    socket.on(
+      "taskUpdated",
+      (newTask) => {
+        console.log(" wbg listening for updatedTask", newTask);
+
+        return setTasks((prevTasks) => {
+          return [...prevTasks, newTask]; // Add the new task to the end of the array
+        });
+      },
+      []
+    );
+
+    return () => {
+      console.log("Component will unmount");
+      socket.disconnect();
+    };
+  });
+
+  useEffect(() => {
+    // Listen for task status update events from the server
+    socket.on(
+      "taskStatusUpdated",
+      (updatedTask) => {
+        setTasks((prevTasks) => {
+          console.log("status update", updatedTask);
+          // Map over the tasks array and replace the updated task
+          const updatedTasks = prevTasks.map((task) =>
+            task._id === updatedTask._id ? updatedTask : task
+          );
           return updatedTasks;
-        } else {
-          // If the task is not found (possibly a new task), add it to the tasks array
-          return [...prevTasks, updatedTask];
-        }
-      });
-      return () => {
-        console.log("Component will unmount");
-        socket.disconnect();
-      };
-    });
-  }, []);
+        });
+      },
+      []
+    );
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      socket.off("taskStatusUpdated");
+    };
+  });
+
+  // Dependency array includes 'socket' to ensure the effect runs when 'socket' changes
+
   // Set up Socket.io connection
 
   return (

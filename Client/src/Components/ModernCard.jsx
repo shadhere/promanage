@@ -11,12 +11,14 @@ const ModernCard = ({
   onMove,
   carrdId,
 }) => {
-  const handleMove = (carrdId, newStatus) => {
+  const handleMove = (newStatus) => {
     console.log("Clicked Card ID:", carrdId);
     console.log("New Status:", newStatus); // Assuming the new status is "inProgress"
     // Call the onMove function passed from the parent component
     if (onMove) {
       onMove(carrdId, newStatus);
+      console.log("Clicked Card ID:", carrdId);
+      console.log("New Status:", newStatus);
     }
   };
   // Destructuring title and priority from props

@@ -33,7 +33,7 @@ module.exports = function (io) {
         "createdBy",
         "name"
       );
-      // io.emit("tasksUpdated", tasks);
+      io.emit("tasksUpdated", tasks);
       res.json(tasks);
     } catch (err) {
       res.status(500).json({ message: "Internal server error" });
@@ -42,8 +42,8 @@ module.exports = function (io) {
 
   router.put("/tasks/:taskId", async (req, res) => {
     try {
-      const { taskId } = req.params;
-      const { newStatus } = req.body;
+      const { taskId } = req.params; // Correctly access taskId from request parameters
+      const { newStatus } = req.body; // Extract newStatus from the request body
 
       // Update the task's status in the database
       const updatedTask = await Task.findByIdAndUpdate(
@@ -52,11 +52,18 @@ module.exports = function (io) {
         { new: true }
       );
 
-      // Emit event to notify clients about the updated task with new status
-      io.emit("taskUpdated", updatedTask);
+      // Check if the task exists and was successfully updated
+      if (!updatedTask) {
+        return res.status(404).json({ error: "Task not found" });
+      }
 
+      // Emit event to notify clients about the updated task with new status
+      io.emit("taskStatusUpdated", updatedTask);
+
+      // Send the updated task object as the response
       res.json(updatedTask);
     } catch (error) {
+      console.error("Error updating task:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   });
