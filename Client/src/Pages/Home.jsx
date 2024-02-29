@@ -5,6 +5,7 @@ import api from "../Api/api";
 import { useEffect } from "react";
 import { useState } from "react";
 import io from "socket.io-client"; // Import the Socket.IO client library
+import { AccordionProvider } from "../Contexts/accordion";
 
 const Home = () => {
   const socket = io("http://localhost:5000"); // Replace with your server URL
@@ -82,7 +83,9 @@ const Home = () => {
       <div className={styles.content}>
         <h1>Welcome to the homepage</h1>
         <h1>Board</h1>
-        <Kanban tasks={tasks} />
+        <AccordionProvider>
+          <Kanban tasks={tasks} />
+        </AccordionProvider>
       </div>
     </div>
   );

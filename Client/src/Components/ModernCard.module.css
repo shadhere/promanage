@@ -1,8 +1,9 @@
 .card {
+  border-radius: 20px;
   border-radius: 8px;
   border: 1px solid #e0e0e0;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 16px;
+  padding: 24px;
   background-color: #fff;
 }
 
@@ -14,7 +15,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 .tag {
@@ -23,6 +24,18 @@
   color: #666;
   padding: 4px 8px;
   border-radius: 4px;
+}
+
+.priorityTag {
+  font-size: 8px;
+  color: #767575;
+}
+.priorityDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
 }
 
 .title {
@@ -49,18 +62,26 @@
 
 .footer {
   display: flex;
-  justify-content: space-between;
+  gap: 50px;
 }
 
-.button {
-  background-color: #007bff;
+.date {
+  font-size: 8px;
+  background-color: #cf3636;
   color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 8px 16px;
   cursor: pointer;
+  padding: 5px 10px 5px 10px;
 }
 
-.button:hover {
-  background-color: #0056b3;
+.buttonsContainer {
+  display: flex;
+  gap: 8px;
+}
+
+.moveCardBtn {
+  font-size: 8px;
+  background-color: #eeecec;
+  color: #767575;
+  cursor: pointer;
+  padding: 5px 10px 5px 10px;
 }

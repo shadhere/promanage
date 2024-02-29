@@ -5,7 +5,6 @@ import addTaskIcon from "../assets/addTaskIcon.svg";
 import ModernCard from "./ModernCard"; // Import the ModernCard component
 import TaskModal from "./TaskModal"; // Import the modal component
 import api from "../Api/api";
-import io from "socket.io-client";
 
 const Kanban = ({ tasks }) => {
   // Destructuring tasks from props
@@ -47,6 +46,7 @@ const Kanban = ({ tasks }) => {
                 key={task._id}
                 carrdId={task._id} // Assuming _id is unique for each task
                 title={task.title}
+                dueDate={task.dueDate}
                 priority={task.priority} // Assuming priority is another property of the task
                 description={task.description} // Assuming you have a description property
                 checklist={task.checklist}
@@ -76,6 +76,7 @@ const Kanban = ({ tasks }) => {
                 key={task._id}
                 carrdId={task._id} // Assuming _id is unique for each task
                 title={task.title}
+                dueDate={task.dueDate}
                 priority={task.priority} // Assuming priority is another property of the task
                 description={task.description} // Assuming you have a description property
                 checklist={task.checklist}
@@ -101,6 +102,7 @@ const Kanban = ({ tasks }) => {
                 key={task._id}
                 carrdId={task._id} // Assuming _id is unique for each task
                 title={task.title}
+                dueDate={task.dueDate}
                 priority={task.priority} // Assuming priority is another property of the task
                 description={task.description} // Assuming you have a description property
                 checklist={task.checklist}
@@ -126,6 +128,7 @@ const Kanban = ({ tasks }) => {
                 key={task._id}
                 carrdId={task._id} // Assuming _id is unique for each task
                 title={task.title}
+                dueDate={task.dueDate}
                 priority={task.priority} // Assuming priority is another property of the task
                 description={task.description} // Assuming you have a description property
                 checklist={task.checklist}

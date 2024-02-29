@@ -2,6 +2,8 @@ import { useState } from "react";
 import styles from "./ModernCard.module.css";
 import Accordion from "./Accordion";
 import ChecklistItem from "./ChecklistItem";
+import moment from "moment";
+import menuIcon from "../assets/menuIcon.svg";
 
 const ModernCard = ({
   title,
@@ -9,8 +11,10 @@ const ModernCard = ({
   description,
   checklist,
   onMove,
+  dueDate,
   carrdId,
 }) => {
+  const formattedDueDate = moment(dueDate).format("MMM DD");
   const handleMove = (newStatus) => {
     console.log("Clicked Card ID:", carrdId);
     console.log("New Status:", newStatus); // Assuming the new status is "inProgress"
@@ -31,17 +35,21 @@ const ModernCard = ({
   return (
     <div className={styles.card}>
       <div className={styles.header}>
-        <div className={styles.priority}>{priority}</div>{" "}
+        <div className={styles.priorityTag}>
+          <div
+            className={styles.priorityDot}
+            style={{ backgroundColor: "red" }}
+          ></div>
+          {priority}
+        </div>
         {/* Displaying priority */}
-        <h3 className={styles.title}>{title}</h3>
         <div className={styles.menu}>
           {/* Menu with three dots */}
-          <div className={styles.menuIcon}></div>
-          <div className={styles.menuIcon}></div>
-          <div className={styles.menuIcon}></div>
+          <img src={menuIcon} />
         </div>
       </div>
       <div className={styles.content}>
+        <h3 className={styles.title}>{title}</h3>
         <Accordion
           title="To Do"
           expanded={isExpanded}
@@ -53,10 +61,33 @@ const ModernCard = ({
         </Accordion>
       </div>
       <div className={styles.footer}>
-        <button onClick={() => handleMove("backlog")}>To Backlog</button>
-        <button onClick={() => handleMove("todo")}>To To Do</button>
-        <button onClick={() => handleMove("inProgress")}>To In Progress</button>
-        <button onClick={() => handleMove("done")}>To Done</button>
+        <div className={styles.date}>{formattedDueDate}</div>
+        <div className={styles.buttonsContainer}>
+          <button
+            onClick={() => handleMove("backlog")}
+            className={styles.moveCardBtn}
+          >
+            BACKLOG
+          </button>
+          <button
+            onClick={() => handleMove("todo")}
+            className={styles.moveCardBtn}
+          >
+            TO-DO
+          </button>
+          <button
+            onClick={() => handleMove("inProgress")}
+            className={styles.moveCardBtn}
+          >
+            PROGRESS
+          </button>
+          <button
+            onClick={() => handleMove("done")}
+            className={styles.moveCardBtn}
+          >
+            DONE
+          </button>
+        </div>
       </div>
     </div>
   );
