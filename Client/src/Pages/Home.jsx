@@ -28,34 +28,32 @@ const Home = () => {
   }, []); // Empty dependency array ensures this effect runs only once when component mounts
 
   useEffect(() => {
+    console.log("Component mounted");
     // Listen for 'taskUpdated' event from the server
-    socket.on(
-      "taskUpdated",
-      (updatedTask) => {
-        // Update the tasks state with the updated task
-        setTasks((prevTasks) => {
-          // Find the index of the updated task in the tasks array
-          const updatedTaskIndex = prevTasks.findIndex(
-            (task) => task.id === updatedTask.id
-          );
-          if (updatedTaskIndex !== -1) {
-            console.log("updatedtask", updatedTask);
-            // If the task is found, update it in the tasks array
-            const updatedTasks = [...prevTasks];
-            updatedTasks[updatedTaskIndex] = updatedTask;
-            return updatedTasks;
-          } else {
-            // If the task is not found (possibly a new task), add it to the tasks array
-            return [...prevTasks, updatedTask];
-          }
-        });
-        return () => {
-          socket.disconnect();
-        };
-      },
-      [updatedTask]
-    );
-  });
+    socket.on("taskUpdated", (updatedTask) => {
+      // Update the tasks state with the updated task
+      setTasks((prevTasks) => {
+        // Find the index of the updated task in the tasks array
+        const updatedTaskIndex = prevTasks.findIndex(
+          (task) => task.id === updatedTask.id
+        );
+        if (updatedTaskIndex !== -1) {
+          console.log("updatedtask", updatedTask);
+          // If the task is found, update it in the tasks array
+          const updatedTasks = [...prevTasks];
+          updatedTasks[updatedTaskIndex] = updatedTask;
+          return updatedTasks;
+        } else {
+          // If the task is not found (possibly a new task), add it to the tasks array
+          return [...prevTasks, updatedTask];
+        }
+      });
+      return () => {
+        console.log("Component will unmount");
+        socket.disconnect();
+      };
+    });
+  }, []);
   // Set up Socket.io connection
 
   return (

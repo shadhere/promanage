@@ -3,7 +3,22 @@ import styles from "./ModernCard.module.css";
 import Accordion from "./Accordion";
 import ChecklistItem from "./ChecklistItem";
 
-const ModernCard = ({ title, priority, checklist }) => {
+const ModernCard = ({
+  title,
+  priority,
+  description,
+  checklist,
+  onMove,
+  carrdId,
+}) => {
+  const handleMove = (carrdId, newStatus) => {
+    console.log("Clicked Card ID:", carrdId);
+    console.log("New Status:", newStatus); // Assuming the new status is "inProgress"
+    // Call the onMove function passed from the parent component
+    if (onMove) {
+      onMove(carrdId, newStatus);
+    }
+  };
   // Destructuring title and priority from props
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -36,10 +51,10 @@ const ModernCard = ({ title, priority, checklist }) => {
         </Accordion>
       </div>
       <div className={styles.footer}>
-        <button className={styles.button}>Button 1</button>
-        <button className={styles.button}>Button 2</button>
-        <button className={styles.button}>Button 3</button>
-        <button className={styles.button}>Button 4</button>
+        <button onClick={() => handleMove("backlog")}>To Backlog</button>
+        <button onClick={() => handleMove("todo")}>To To Do</button>
+        <button onClick={() => handleMove("inProgress")}>To In Progress</button>
+        <button onClick={() => handleMove("done")}>To Done</button>
       </div>
     </div>
   );

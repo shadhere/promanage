@@ -4,30 +4,51 @@ import collapseAllIcon from "../assets/collapseAllIcon.svg";
 import addTaskIcon from "../assets/addTaskIcon.svg";
 import ModernCard from "./ModernCard"; // Import the ModernCard component
 import TaskModal from "./TaskModal"; // Import the modal component
-import io from "socket.io-client"; // Import the Socket.IO client library
+import api from "../Api/api";
+import io from "socket.io-client";
 
 const Kanban = ({ tasks }) => {
-  const socket = io("http://localhost:5000/");
-
   // Destructuring tasks from props
+  const [kanbanTasks, setKanbanTasks] = useState(tasks);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log("Connected to server", socket.id);
-    });
+  const socket = io("http://localhost:5000"); // Replace with your server URL
 
-    // Listen for the "newTask" event from the server
-    socket.on("newTask", (newTask) => {
-      // Update tasks state with the new task
-      setTasks((prevTasks) => [...prevTasks, newTask]);
+  useEffect(() => {
+    socket.on("taskUpdated", (updatedTask) => {
+      setKanbanTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task._id === updatedTask._id ? updatedTask : task
+        )
+      );
     });
 
     return () => {
-      // Clean up event listener when component unmounts
-      socket.off("newTask");
+      socket.off("taskUpdated");
     };
   }, [socket]);
+
+  const onMove = async (carrdId, newStatus) => {
+    try {
+      console.log("Card ID:", carrdId, " newStatus:", newStatus);
+      // Make update request to server to move the card
+      const response = await api.put(`/tasks/${carrdId}`, { newStatus });
+      const updatedTask = response.data;
+
+      // Update the Kanban board with the updated task
+      setKanbanTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task._id === updatedTask._id ? updatedTask : task
+        )
+      );
+
+      // Emit event to notify other clients about the updated task with new status
+      socket.emit("taskUpdated", updatedTask);
+    } catch (error) {
+      console.error("Error updating task:", error);
+    }
+  };
+
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -49,6 +70,7 @@ const Kanban = ({ tasks }) => {
             .filter((task) => task.status === "backlog")
             .map((task) => (
               <ModernCard
+                moveCard={moveCard} // Pass moveCard function to ModernCard
                 key={task._id} // Assuming _id is unique for each task
                 title={task.title}
                 priority={task.priority} // Assuming priority is another property of the task
@@ -75,11 +97,13 @@ const Kanban = ({ tasks }) => {
             .filter((task) => task.status === "todo")
             .map((task) => (
               <ModernCard
-                key={task._id} // Assuming _id is unique for each task
+                key={task._id}
+                carrdId={task._id} // Assuming _id is unique for each task
                 title={task.title}
                 priority={task.priority} // Assuming priority is another property of the task
                 description={task.description} // Assuming you have a description property
                 checklist={task.checklist}
+                onMove={onMove} // Pass moveCard function to ModernCard
               />
             ))}
         </div>

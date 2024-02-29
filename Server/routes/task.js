@@ -40,5 +40,26 @@ module.exports = function (io) {
     }
   });
 
+  router.put("/tasks/:taskId", async (req, res) => {
+    try {
+      const { taskId } = req.params;
+      const { newStatus } = req.body;
+
+      // Update the task's status in the database
+      const updatedTask = await Task.findByIdAndUpdate(
+        taskId,
+        { status: newStatus },
+        { new: true }
+      );
+
+      // Emit event to notify clients about the updated task with new status
+      io.emit("taskUpdated", updatedTask);
+
+      res.json(updatedTask);
+    } catch (error) {
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
   return router;
 };
