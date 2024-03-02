@@ -9,7 +9,12 @@ const KanbanColumn = ({
   handleCollapseAllForBoard,
   boardName,
   toggleModal,
+  handleTaskDelete, // Pass the delete function to the column
+  handleEditTask,
 }) => {
+  if (!tasks) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className={styles.column}>
       <h2 className={styles.columnTitle}>
@@ -26,7 +31,7 @@ const KanbanColumn = ({
           <img
             src={collapseAllIcon}
             className={styles.icon}
-            onClick={() => handleCollapseAllForBoard(boardName)}
+            onClick={() => handleCollapseAllForBoard()}
           />
         </div>
       </h2>
@@ -41,6 +46,9 @@ const KanbanColumn = ({
             description={task.description}
             checklist={task.checklist}
             onMove={onMove}
+            handleTaskDelete={handleTaskDelete}
+            toggleModal={toggleModal}
+            handleEditTask={handleEditTask}
           />
         ))}
       </div>

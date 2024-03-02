@@ -1,9 +1,7 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useState } from "react";
 
 // Create a context for managing accordion states
-const AccordionContext = createContext();
-
-export const useAccordionContext = () => useContext(AccordionContext);
+export const AccordionContext = createContext();
 
 export const AccordionProvider = ({ children }) => {
   // State to manage accordion states for all cards
@@ -19,13 +17,16 @@ export const AccordionProvider = ({ children }) => {
 
   // Function to collapse all accordions for a specific board
   const collapseAllForBoard = (boardName) => {
-    const updatedStates = { ...accordionStates };
-    Object.keys(updatedStates).forEach((cardId) => {
-      if (cardId.startsWith(boardName)) {
+    console.log("Before state update:", accordionStates);
+
+    setAccordionStates((prevState) => {
+      const updatedStates = { ...prevState };
+      Object.keys(updatedStates).forEach((cardId) => {
         updatedStates[cardId] = false;
-      }
+      });
+      console.log("After state update:", updatedStates);
+      return updatedStates;
     });
-    setAccordionStates(updatedStates);
   };
 
   // Function to check if accordion is expanded or not

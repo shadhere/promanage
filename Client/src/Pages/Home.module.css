@@ -6,11 +6,40 @@
 }
 
 .content {
-  padding-left: 40px;
+  padding-left: 20px;
   overflow: scroll;
   width: 100vw;
 }
 
 .content h1 {
   color: black;
+  font-size: 30px;
+}
+
+.header {
+  display: flex;
+  padding-left: 20px;
+}
+
+.board {
+  display: flex;
+  padding-left: 20px;
+
+  justify-content: space-between;
+}
+
+.board select {
+  background-color: #fff;
+  color: black;
+  border: none;
+}
+
+.board select:hover {
+  border-color: #fff;
+  outline: none;
+}
+
+.board select:focus {
+  border-color: #fff;
+  border: none;
 }

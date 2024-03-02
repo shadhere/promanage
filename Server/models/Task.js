@@ -12,6 +12,10 @@ const taskSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User", // Assuming you have a User model, adjust this accordingly
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Task = mongoose.model("Task", taskSchema);

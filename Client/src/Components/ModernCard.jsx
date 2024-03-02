@@ -11,10 +11,24 @@ const ModernCard = ({
   description,
   checklist,
   onMove,
+  toggleModal,
   dueDate,
+  onDelete,
   carrdId,
+  handleTaskDelete,
+  handleEditTask,
 }) => {
   const formattedDueDate = moment(dueDate).format("MMM DD");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleMenuClick = () => {
+    setIsMenuOpen(true);
+  };
+
+  const handleCloseMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   const handleMove = (newStatus) => {
     console.log("Clicked Card ID:", carrdId);
     console.log("New Status:", newStatus); // Assuming the new status is "inProgress"
@@ -27,6 +41,16 @@ const ModernCard = ({
   };
   // Destructuring title and priority from props
 
+  const handleDelete = () => {
+    handleTaskDelete(carrdId);
+  };
+
+  const handleEdit = () => {
+    handleEditTask(carrdId);
+
+    toggleModal();
+  };
+
   return (
     <div className={styles.card}>
       <div className={styles.header}>
@@ -37,10 +61,18 @@ const ModernCard = ({
           ></div>
           {priority}
         </div>
-        {/* Displaying priority */}
         <div className={styles.menu}>
-          {/* Menu with three dots */}
-          <img src={menuIcon} />
+          <img src={menuIcon} alt="Menu" onClick={handleMenuClick}></img>
+          {isMenuOpen && (
+            <div className={styles.menuModal}>
+              <div className={styles.menuOptions}>
+                <button onClick={handleEdit}>Edit</button>
+                <button onClick={handleDelete}>Delete</button>
+                <button>Share</button>
+              </div>
+              <button onClick={handleCloseMenu}>Close Menu</button>
+            </div>
+          )}
         </div>
       </div>
       <div className={styles.content}>

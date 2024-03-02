@@ -1,7 +1,7 @@
 import styles from "./Accordion.module.css";
 import upArrowIcon from "../assets/upArrowIcon.svg";
 import downArrowIcon from "../assets/downArrowIcon.svg";
-import { useAccordionContext } from "../Contexts/accordion";
+import { useAccordionContext } from "../Contexts/accordionUtils";
 const Accordion = ({ carrdId, children }) => {
   const { isAccordionExpanded, toggleAccordion } = useAccordionContext();
   const expanded = isAccordionExpanded(carrdId);
