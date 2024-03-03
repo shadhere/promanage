@@ -28,7 +28,4 @@ app.get("/api", (req, res) => {
   res.send({ message: "Server Started!" });
 });
 
-// Return the Socket.IO server instance
-// This is not necessary since the io instance is already globally accessible
-
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`)); // Start the HTTP server
