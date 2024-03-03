@@ -3,23 +3,3 @@ node_modules/
 
 # Environment variables
 .env
-
-# Logs and temporary files
-logs/
-*.log
-
-# Runtime data
-pids/
-*.pid
-*.pid.lock
-
-# Coverage reports
-coverage/
-
-# System-specific files
-.DS_Store
-Thumbs.db
-
-# Editor/IDE files
-.vscode/
-.idea/
