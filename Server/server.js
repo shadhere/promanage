@@ -24,7 +24,7 @@ app.use("/analytics", authMiddleware);
 
 app.use(task());
 
-app.get("/api", (req, res) => {
+app.get("/", (req, res) => {
   res.send({ message: "Server Started!" });
 });
 
