@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://promanage-rycy.vercel.app/",
+  baseURL: "https://myprojectpromage.vercel.app/",
   headers: {
     "Content-Type": "application/json",
   },
