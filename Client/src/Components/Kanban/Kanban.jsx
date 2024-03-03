@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import KanbanColumn from "../Components/KanbanColumn";
-import TaskModal from "./TaskModal"; // Import the modal component
-import api from "../Api/api";
+import KanbanColumn from "./KanbanColumn";
+import TaskModal from "../TaskModal/TaskModal"; // Import the modal component
+import api from "../../Api/api";
 import styles from "./Kanban.module.css";
-import { useAccordionContext } from "../Contexts/accordionUtils";
+import { useAccordionContext } from "../../Contexts/accordionUtils";
 
 const Kanban = ({ tasks, fetchTasks }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const { collapseAllForBoard } = useAccordionContext();
   const [taskState, setTaskState] = useState({
     title: "",
@@ -15,6 +16,14 @@ const Kanban = ({ tasks, fetchTasks }) => {
     dueDate: null,
     status: "todo",
   });
+
+  // const openDeleteModal = () => {
+  //   setIsDeleteModalOpen(true);
+  // };
+
+  // const closeDeleteModal = () => {
+  //   setIsDeleteModalOpen(false);
+  // };
 
   const handleAddTask = async () => {
     try {

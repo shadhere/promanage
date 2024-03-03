@@ -4,7 +4,10 @@ import styles from "./PrioritySelector.module.css";
 const PrioritySelector = ({ priority, handlePriorityChange }) => {
   return (
     <div className={styles.priorityContainer}>
-      <label>Select Priority</label>
+      <label>
+        Select Priority
+        <span style={{ color: "red", marginLeft: "5px" }}>*</span>
+      </label>
       <div className={styles.priorityTags}>
         <div
           className={`${styles.priorityTag} ${

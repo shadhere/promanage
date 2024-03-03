@@ -1,0 +1,379 @@
+.taskPage {
+  display: flex;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  width: 87vw;
+  height: 100vh;
+}
+
+.card {
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  padding: 62px 33px 62px 33px;
+  background-color: #fff;
+  max-height: 600px;
+}
+.checklistCount {
+  color: black;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+}
+.todoItem {
+  color: black;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.tag {
+  background-color: #f0f0f0;
+  color: #666;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.priorityTag {
+  font-size: 12px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  color: #767575;
+}
+.priorityDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.title {
+  font-size: 30px;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  color: black;
+}
+
+.menu {
+  display: flex;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.menuIcon {
+  width: 12px;
+  height: 12px;
+  background-color: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.content {
+  margin-bottom: 16px;
+}
+
+.footer {
+  display: flex;
+  gap: 10px;
+  color: black;
+}
+
+.footer span {
+  font-family: "poppins", sans-serif;
+  font-size: 16px;
+  line-height: 30px;
+}
+
+.date {
+  font-family: "poppins", sans-serif;
+  font-size: 14px;
+  border-radius: 8px;
+  font-weight: 500;
+  background-color: #cf3636;
+  color: #fff;
+  padding: 5px 10px 5px 10px;
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 8px;
+}
+
+.moveCardBtn {
+  font-size: 8px;
+  background-color: #eeecec;
+  color: #767575;
+  cursor: pointer;
+  padding: 5px 10px 5px 10px;
+}
+
+/* ModernCardMenu.module.css */
+
+/* ModernCardMenu.module.css */
+
+.menuModal {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 999; /* Ensure the modal appears on top */
+}
+
+.menuOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menuOptions button {
+  background-color: transparent;
+  border: none;
+  padding: 5px 10px;
+  justify-content: left;
+  cursor: pointer;
+  color: black;
+}
+
+.menuOptions button:hover {
+  background-color: #f0f0f0;
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+  max-height: 400px;
+}
+
+.checklistItems {
+  padding: 20px 24px 0px 0px;
+  overflow-x: scroll;
+  margin-bottom: 30px;
+}
+
+.checklistItems input {
+  pointer-events: none;
+}
+
+.checklistItems::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgb(255, 255, 255);
+  border-radius: 10px;
+  background-color: white;
+}
+
+.checklistItems::-webkit-scrollbar {
+  width: 12px;
+  background-color: #f5f5f5;
+}
+
+.checklistItems::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #9cb7c5;
+}
+.sidebar {
+  width: 250px;
+  background-color: #fff;
+  color: #000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 30px 42px 30px 42px;
+}
+
+.logo h1 {
+  font-size: 16px;
+}
+
+.logo img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .taskPage {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+  }
+  .container {
+    width: 100vw;
+    height: 100vh;
+  }
+  .card {
+    padding: 20px;
+    width: 312px;
+  }
+
+  .todoItem {
+    color: black;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .tag {
+    background-color: #f0f0f0;
+    color: #666;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+
+  .priorityTag {
+    font-size: 12px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    color: #767575;
+  }
+
+  .priorityDot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+  }
+
+  .title {
+    font-size: 24px; /* Adjust font size for mobile */
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    color: black;
+  }
+
+  .menu {
+    display: flex;
+    gap: 8px;
+    cursor: pointer;
+  }
+
+  .menuIcon {
+    width: 12px;
+    height: 12px;
+    background-color: #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .content {
+    margin-bottom: 16px;
+  }
+
+  .footer {
+    display: flex;
+    gap: 10px;
+    color: black;
+  }
+
+  .footer span {
+    font-family: "poppins", sans-serif;
+    font-size: 16px;
+    line-height: 30px;
+  }
+
+  .date {
+    font-family: "poppins", sans-serif;
+    font-size: 14px;
+    border-radius: 8px;
+    font-weight: 500;
+    background-color: #cf3636;
+    color: #fff;
+    padding: 5px 10px 5px 10px;
+  }
+
+  .buttonsContainer {
+    display: flex;
+    gap: 8px;
+  }
+
+  .moveCardBtn {
+    font-size: 8px;
+    background-color: #eeecec;
+    color: #767575;
+    cursor: pointer;
+    padding: 5px 10px 5px 10px;
+  }
+
+  /* ModernCardMenu.module.css */
+
+  .menuModal {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 999; /* Ensure the modal appears on top */
+  }
+
+  .menuOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .menuOptions button {
+    background-color: transparent;
+    border: none;
+    padding: 5px 10px;
+    justify-content: left;
+    cursor: pointer;
+    color: black;
+  }
+
+  .menuOptions button:hover {
+    background-color: #f0f0f0;
+  }
+
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+    max-width: 200px;
+  }
+
+  .checklistItems {
+    padding: 20px 24px 0px 0px;
+    overflow-x: auto;
+    margin-bottom: 30px;
+  }
+
+  .checklistItems input {
+    pointer-events: none;
+  }
+
+  .checklistItems::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgb(255, 255, 255);
+    border-radius: 10px;
+    background-color: white;
+  }
+
+  .checklistItems::-webkit-scrollbar {
+    width: 8px;
+    background-color: #f5f5f5;
+  }
+
+  .checklistItems::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #9cb7c5;
+  }
+}

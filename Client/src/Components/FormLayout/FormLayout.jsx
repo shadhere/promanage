@@ -1,5 +1,5 @@
 // FormLayout.js
-import styles from "../Form.module.css";
+import styles from "../../Components/Form/Form.module.css";
 import authArt from "../../assets/Art.png";
 import authArtBackground from "../../assets/authArtBackground.png";
 

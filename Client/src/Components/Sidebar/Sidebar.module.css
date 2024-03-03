@@ -1,7 +1,9 @@
 .sidebar {
   display: flex;
+  font-family: "poppins", sans-serif;
+  font-weight: 500;
   flex-direction: column;
-  width: 250px;
+  min-width: 250px;
   height: 100vh;
   background-color: #fff;
   color: #000;
@@ -46,6 +48,14 @@ nav div:hover {
   background-color: #4391ed1a;
 }
 
+.nav:focus {
+  background-color: #4391ed1a;
+}
+
+nav div:focus {
+  background-color: #4391ed1a;
+}
+
 nav div a {
   color: #000;
   text-decoration: none;
@@ -74,5 +84,13 @@ nav div img {
   border: none;
   color: red;
   font-size: 14px;
+  cursor: pointer;
+}
+
+.logout a {
+  color: #cf3636;
+
+  text-decoration: none;
+  font-size: 16px;
   cursor: pointer;
 }

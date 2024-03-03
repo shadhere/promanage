@@ -2,6 +2,7 @@
 
 .kanbanBoard {
   display: flex;
+  flex: 1 1 auto; /* This will allow the kanban to take up the remaining space */
   flex-direction: row; /* Display columns in a row */
   width: 100vw; /* Occupy full width of the screen */
   padding: 10px;

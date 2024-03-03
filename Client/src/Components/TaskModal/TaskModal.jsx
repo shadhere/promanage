@@ -1,6 +1,6 @@
-import Modal from "./Modal";
-import PrioritySelector from "./PrioritySelector";
-import Checklist from "./Checklist";
+import Modal from "../Modal/Modal";
+import PrioritySelector from "../PrioritySelector/PrioritySelector";
+import Checklist from "../Checklist/Checklist";
 import styles from "./TaskModal.module.css";
 import DatePicker from "react-datepicker"; // Import the date picker component
 import "react-datepicker/dist/react-datepicker.css"; // Import the styles for the date picker
@@ -32,13 +32,16 @@ const TaskModal = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className={styles.header}>
-        <label>Title</label>
+        <label>
+          Title<span style={{ color: "red", marginLeft: "5px" }}>*</span>
+        </label>
         <input
           type="text"
           id="taskName"
           value={taskState.title}
           onChange={(e) => handleFieldChange("title", e.target.value)}
           placeholder="Enter Task Title"
+          required
         />
       </div>
       <PrioritySelector
@@ -53,6 +56,8 @@ const TaskModal = ({
         handleChecklistItemInputChange={handleChecklistItemInputChange}
         handleDeleteChecklistItem={handleDeleteChecklistItem}
         handleAddChecklistItem={handleAddChecklistItem}
+        showtextarea={false}
+        isOpen={isOpen}
       />
       <div className={styles.btnContainer}>
         <DatePicker

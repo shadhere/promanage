@@ -26,7 +26,11 @@
 }
 
 .header label {
-  margin-bottom: 5px;
+  font-family: "poppins", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 10px;
+  margin-right: 5px;
   color: black;
 }
 
@@ -38,6 +42,7 @@
   line-height: 20px;
   border-radius: 4px;
   margin-bottom: 10px;
+  margin-top: 10px;
   border: 1px solid #e2e2e2;
 }
 
@@ -87,7 +92,7 @@
   display: flex;
   align-items: center;
   border: 1px solid #e2e2e2;
-  padding: 12px;
+  padding: 8px;
   border-radius: 8px;
   gap: 10px;
 }
@@ -110,17 +115,28 @@
   border-color: transparent; /* Remove border when checked */
 }
 
-.checklistItem input[type="text"] {
+.checklistItem textarea {
+  font-family: "poppins", sans-serif;
   border: none; /* Remove default border */
   background: transparent; /* Transparent background */
   flex: 1; /* Fill remaining space */
-  padding: 0px; /* Remove padding */
   outline: none; /* Remove outline */
   font-size: 16px; /* Adjust font size */
-  margin: 0px;
+  color: black;
+  resize: none;
   line-height: 20px;
-  height: 20px;
-  width: 500px;
+}
+
+.checklistItem h3 {
+  font-family: "poppins", sans-serif;
+  border: none; /* Remove default border */
+  background: transparent; /* Transparent background */
+  flex: 1; /* Fill remaining space */
+  outline: none; /* Remove outline */
+  font-size: 16px; /* Adjust font size */
+  color: black;
+  resize: none;
+  line-height: 20px;
 }
 
 .deleteIcon {
@@ -153,17 +169,18 @@
   color: red;
   border: 1px solid red;
   border-radius: 12px;
-  padding: 10px 50px 10px 50px;
+  padding: 0px 50px 0px 50px;
   margin-left: 65px;
 }
 
 .datePicker {
   background-color: transparent;
-  color: #767575;
+  color: #494949;
   border: 1px solid #e2e2e2;
   border-radius: 12px;
-  padding: 10px 40px 10px 40px;
+  padding: 10px 60px 10px 60px;
   text-align: center;
+  font-size: 16px;
   cursor: pointer;
 }
 
@@ -172,7 +189,8 @@
   color: white;
   border: 1px solid #17a2b8;
   border-radius: 12px;
-  padding: 10px 60px 10px 60px;
+  padding: 0px 60px 0px 60px;
+  margin-left: 20px;
 }
 
 .priorityTags {

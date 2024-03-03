@@ -5,6 +5,9 @@
 }
 
 .checklistContainer label {
+  font-family: "poppins", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
   margin-bottom: 5px;
   color: black;
 }
@@ -76,8 +79,6 @@
   font-size: 16px; /* Adjust font size */
   margin: 0px;
   line-height: 20px;
-  height: 20px;
-  width: 500px;
 }
 
 .deleteIcon {

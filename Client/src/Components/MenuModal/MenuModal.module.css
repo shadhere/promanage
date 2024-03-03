@@ -1,0 +1,43 @@
+.dropdown {
+  position: relative;
+}
+
+.dropdownToggle {
+  background-color: #ffffff;
+  padding: 5px 10px;
+  color: black;
+  cursor: pointer;
+}
+
+.dropdownMenu {
+  position: absolute;
+  box-shadow: 0px 2px 22px 0px #7e7a7a40;
+  border-radius: 12px;
+  font-family: "poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  top: 70%;
+  right: 5%;
+  background-color: #ffffff;
+  padding: 5px 0;
+  color: black;
+  list-style: none;
+  margin: 0;
+  width: 150px;
+  z-index: 1000; /* Adjust z-index to make sure it appears on top of everything */
+}
+
+.dropdownMenu li {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.dropdownMenu li:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdownIcon {
+  margin-left: 4px;
+  margin-bottom: 2px;
+}

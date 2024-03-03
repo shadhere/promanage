@@ -2,13 +2,13 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./Form.module.css";
 import { useNavigate } from "react-router-dom";
-import authArt from "../assets/Art.png";
-import emailIcon from "../assets/emailIcon.svg";
-import userIcon from "../assets/userIcon.svg";
-import passwordIcon from "../assets/passwordIcon.svg";
-import authArtBackground from "../assets/authArtBackground.png";
-import showPasswordIcon from "../assets/showPasswordIcon.svg";
-import hidePasswordIcon from "../assets/hidePasswordIcon.png";
+import authArt from "../../assets/Art.png";
+import emailIcon from "../../assets/emailIcon.svg";
+import userIcon from "../../assets/userIcon.svg";
+import passwordIcon from "../../assets/passwordIcon.svg";
+import authArtBackground from "../../assets/authArtBackground.png";
+import showPasswordIcon from "../../assets/showPasswordIcon.svg";
+import hidePasswordIcon from "../../assets/hidePasswordIcon.png";
 
 const Form = ({ formType, onSubmit, name }) => {
   const [authData, setAuthData] = useState({

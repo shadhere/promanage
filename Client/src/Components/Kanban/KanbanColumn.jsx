@@ -1,13 +1,15 @@
 import styles from "./Kanban.module.css";
-import collapseAllIcon from "../assets/collapseAllIcon.svg";
-import ModernCard from "./ModernCard"; // Import the ModernCard component
-import addTaskIcon from "../assets/addTaskIcon.svg"; // Import the addTaskIcon
+import collapseAllIcon from "../../assets/collapseAllIcon.svg";
+import ModernCard from "../ModernCard/ModernCard"; // Import the ModernCard component
+import addTaskIcon from "../../assets/addTaskIcon.svg"; // Import the addTaskIcon
 const KanbanColumn = ({
   title,
   tasks,
   onMove,
+  openDeleteModal,
   handleCollapseAllForBoard,
   boardName,
+  openModal,
   toggleModal,
   handleTaskDelete, // Pass the delete function to the column
   handleEditTask,
@@ -28,6 +30,7 @@ const KanbanColumn = ({
               onClick={toggleModal}
             />
           )}
+
           <img
             src={collapseAllIcon}
             className={styles.icon}
@@ -38,6 +41,8 @@ const KanbanColumn = ({
       <div className={styles.tasks}>
         {tasks.map((task) => (
           <ModernCard
+            openModal={openModal}
+            openDeleteModal={openDeleteModal}
             key={task._id}
             carrdId={task._id}
             title={task.title}
@@ -48,6 +53,7 @@ const KanbanColumn = ({
             onMove={onMove}
             handleTaskDelete={handleTaskDelete}
             toggleModal={toggleModal}
+            boardName={boardName}
             handleEditTask={handleEditTask}
           />
         ))}

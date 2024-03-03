@@ -1,5 +1,6 @@
-import styles from "./TaskModal.module.css";
-import deleteIcon from "../assets/deleteIcon.svg";
+import styles from "../../Components/TaskModal/TaskModal.module.css";
+import deleteIcon from "../../assets/deleteIcon.svg";
+import TextareaAutosize from "react-textarea-autosize";
 
 const ChecklistItem = ({
   item,
@@ -7,6 +8,7 @@ const ChecklistItem = ({
   handleChecklistItemChange,
   handleChecklistItemInputChange,
   handleDeleteChecklistItem,
+  showIcon = true,
 }) => {
   return (
     <div className={styles.checklistItem}>
@@ -15,18 +17,21 @@ const ChecklistItem = ({
         checked={item.completed}
         onChange={() => handleChecklistItemChange(index)}
       />
-      <input
-        type="text"
+      <TextareaAutosize
+        id="myTextarea"
+        rows={1}
         value={item.text}
         onChange={(e) => handleChecklistItemInputChange(index, e.target.value)}
         placeholder="Enter checklist item"
       />
-      <img
-        src={deleteIcon}
-        className={styles.deleteIcon}
-        alt="Delete"
-        onClick={() => handleDeleteChecklistItem(index)}
-      />
+      {showIcon && (
+        <img
+          src={deleteIcon}
+          className={styles.deleteIcon}
+          alt="Delete"
+          onClick={() => handleDeleteChecklistItem(index)}
+        />
+      )}
     </div>
   );
 };

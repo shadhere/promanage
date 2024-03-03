@@ -2,11 +2,11 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home.jsx";
 import LoginPage from "./Pages/Login.jsx";
 import RegisterPage from "./Pages/Register.jsx";
-import PrivateRoute from "./Components/PrivateRoute.jsx";
+import PrivateRoute from "./Components/PrivateRoute/PrivateRoute.jsx";
 import { AuthProvider } from "./Contexts/auth.jsx";
 import Settings from "./Pages/Settings.jsx";
 import Analytics from "./Pages/Analytics.jsx";
-import IndividualTask from "./Components/IndividualTask.jsx";
+import IndividualTask from "./Components/IndivualTask/IndividualTask.jsx";
 function App() {
   return (
     <AuthProvider>

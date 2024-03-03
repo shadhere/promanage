@@ -1,8 +1,13 @@
 import styles from "./Accordion.module.css";
-import upArrowIcon from "../assets/upArrowIcon.svg";
-import downArrowIcon from "../assets/downArrowIcon.svg";
-import { useAccordionContext } from "../Contexts/accordionUtils";
-const Accordion = ({ carrdId, children }) => {
+import upArrowIcon from "../../assets/upArrowIcon.svg";
+import downArrowIcon from "../../assets/downArrowIcon.svg";
+import { useAccordionContext } from "../../Contexts/accordionUtils";
+const Accordion = ({
+  carrdId,
+  children,
+  completedItemsCount,
+  checklistItemslength,
+}) => {
   const { isAccordionExpanded, toggleAccordion } = useAccordionContext();
   const expanded = isAccordionExpanded(carrdId);
 
@@ -13,7 +18,9 @@ const Accordion = ({ carrdId, children }) => {
   return (
     <div className={`${styles.accordion} ${expanded ? styles.expanded : ""}`}>
       <div className={styles.accordionHeader} onClick={handleToggle}>
-        <h3>Checklist</h3>
+        <h3>
+          Checklist {completedItemsCount}/{checklistItemslength}
+        </h3>
         <div className={styles.accordionIcon}>
           {expanded ? (
             <img src={upArrowIcon} alt="" />

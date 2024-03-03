@@ -1,98 +1,75 @@
+// Import necessary modules and models
 const express = require("express");
 const router = express.Router();
+const authMiddleware = require("../middleware/auth");
+const mongoose = require("mongoose");
 const Task = require("../models/Task");
+const User = require("../models/User");
 
-router.get("/analytics", async (req, res) => {
+// Endpoint to get count of tasks created by a particular user grouped by status and priority
+router.get("/analytics", authMiddleware, async (req, res) => {
+  console.log("Analytics endpoint called");
+
+  const userId = req.user._id;
+  console.log(`Analytics endpoint called with userId: ${userId}`);
+
   try {
-    // Ensure that req.user.id exists
-    if (!req.user || !req.user.id) {
-      return res.status(400).send("User ID not provided in request.");
-    }
+    // Aggregate counts by status
+    const statusCounts = await Task.aggregate([
+      {
+        $match: { createdBy: new mongoose.Types.ObjectId(userId) },
+      },
+      {
+        $group: {
+          _id: "$status",
+          count: { $sum: 1 },
+        },
+      },
+    ]);
 
-    // Get the current user ID from the request object
-    const userId = req.user.id;
+    // Aggregate counts by priority
+    const priorityCounts = await Task.aggregate([
+      {
+        $match: { createdBy: new mongoose.Types.ObjectId(userId) },
+      },
+      {
+        $group: {
+          _id: "$priority",
+          count: { $sum: 1 },
+        },
+      },
+    ]);
 
-    // Find tasks belonging to the current user
-    const tasks = await Task.find({ createdBy: userId });
+    console.log("Task counts by status:", statusCounts);
+    console.log("Task counts by priority:", priorityCounts);
 
-    let backlogTasks = 0;
-    let todoTasks = 0;
-    let inProgressTasks = 0;
-    let completedTasks = 0;
-    let lowPriorityTasks = 0;
-    let moderatePriorityTasks = 0;
-    let highPriorityTasks = 0;
-    let dueDateTasks = {};
-
-    const currentDate = new Date();
-
-    tasks.forEach((task) => {
-      // Categorize tasks based on status
-      switch (task.status) {
-        case "Backlog":
-          backlogTasks++;
-          break;
-        case "To-do":
-          todoTasks++;
-          break;
-        case "In-Progress":
-          inProgressTasks++;
-          break;
-        case "Completed":
-          completedTasks++;
-          break;
-        default:
-          break;
-      }
-
-      // Categorize tasks based on priority
-      switch (task.priority) {
-        case "Low Priority":
-          lowPriorityTasks++;
-          break;
-        case "Moderate Priority":
-          moderatePriorityTasks++;
-          break;
-        case "High Priority":
-          highPriorityTasks++;
-          break;
-        default:
-          break;
-      }
-
-      // Categorize tasks based on due date
-      if (task.dueDate) {
-        const dueDate = new Date(task.dueDate);
-        const dueDateString = dueDate.toDateString();
-        if (!dueDateTasks[dueDateString]) {
-          dueDateTasks[dueDateString] = 1;
-        } else {
-          dueDateTasks[dueDateString]++;
-        }
-      }
+    const overdueCount = await Task.countDocuments({
+      createdBy: new mongoose.Types.ObjectId(userId),
+      dueDate: { $lt: new Date() }, // Find tasks with due dates less than the current date
     });
 
-    // Sort the keys in dueDateTasks chronologically
-    const sortedDueDateTasks = {};
-    Object.keys(dueDateTasks)
-      .sort()
-      .forEach((key) => {
-        sortedDueDateTasks[key] = dueDateTasks[key];
-      });
+    const aggregatedCounts = {
+      status: {},
+      priority: {},
+      overdue: overdueCount,
+    };
 
-    res.status(200).json({
-      backlogTasks,
-      todoTasks,
-      inProgressTasks,
-      completedTasks,
-      lowPriorityTasks,
-      moderatePriorityTasks,
-      highPriorityTasks,
-      dueDateTasks: sortedDueDateTasks,
+    // Store status counts
+    statusCounts.forEach(({ _id, count }) => {
+      aggregatedCounts.status[_id] = count;
     });
+
+    // Store priority counts
+    priorityCounts.forEach(({ _id, count }) => {
+      aggregatedCounts.priority[_id] = count;
+    });
+
+    console.log("Aggregated counts:", aggregatedCounts);
+
+    res.json(aggregatedCounts);
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal Server Error: " + error.message);
+    console.error("Error in analytics endpoint:", error.message);
+    res.status(500).json({ message: error.message });
   }
 });
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "../Components/Form.module.css";
+import styles from "../Components/Form/Form.module.css";
 import { useNavigate } from "react-router-dom";
 import emailIcon from "../assets/emailIcon.svg";
 import PasswordField from "../Components/PasswordField/PasswordField";

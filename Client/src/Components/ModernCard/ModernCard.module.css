@@ -1,0 +1,185 @@
+.card {
+  border-radius: 20px;
+  border-width: 0px, 0px, 0px, 0px;
+  border-style: solid;
+  border-color: #000000;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+.todoItem {
+  color: black;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.tag {
+  font-size: 12px;
+  background-color: #f0f0f0;
+  color: #666;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.priorityTag {
+  display: flex;
+}
+
+.priorityDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.priorityText {
+  margin-top: -2px;
+  font-size: 12px;
+  color: #707070;
+  font-family: "poppins", sans-serif;
+  font-weight: 500;
+}
+.title {
+  font-size: 24px;
+  margin-top: 15px;
+  color: black;
+  font-family: "poppins", sans-serif;
+  font-weight: 500;
+}
+
+.menu {
+  display: flex;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.menuIcon {
+  width: 12px;
+  height: 12px;
+  background-color: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.content {
+  margin-bottom: 16px;
+  width: auto;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.date {
+  font-family: "poppins", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  background-color: #cf3636;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 5px 10px 5px 10px;
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 8px;
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.moveCardBtn {
+  font-family: "poppins", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  background-color: #eeecec;
+  color: #767575;
+  cursor: pointer;
+  padding: 5px 10px 5px 10px;
+}
+
+/* ModernCardMenu.module.css */
+
+/* ModernCardMenu.module.css */
+
+.checklistItems {
+  padding-top: 20px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+}
+
+.menuModal {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 999; /* Ensure the modal appears on top */
+}
+
+.menuOptions {
+  position: absolute;
+  box-shadow: 0px 2px 22px 0px #7e7a7a40;
+  border-radius: 12px;
+  font-family: "poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  top: 70%;
+  right: 5%;
+  background-color: #ffffff;
+  padding: 10px 10px 10px 10px;
+  color: black;
+  list-style: none;
+  margin: 0;
+  z-index: 1000; /* Adjust z-index to make sure it appears on top of everything */
+}
+
+.menuOptions button {
+  background-color: transparent;
+  border: none;
+  padding: 5px 80px 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  cursor: pointer;
+  color: black;
+}
+
+/* Custom styles for the toast notifications */
+.Toastify__toast-container {
+  z-index: 9999;
+}
+
+.Toastify__toast--info {
+  background-color: #3498db;
+}
+
+.Toastify__toast--success {
+  background-color: #000;
+}
+
+.Toastify__toast--error {
+  background-color: #e74c3c;
+}
+
+.Toastify__toast-body {
+  font-family: Arial, sans-serif;
+}

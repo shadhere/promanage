@@ -1,64 +1,101 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import styles from "./Analytics.module.css";
-import Sidebar from "../Components/Sidebar/Sidebar";
 import api from "../Api/api";
+import Sidebar from "../Components/Sidebar/Sidebar";
 
-function Analytics() {
-  const [analyticsData, setAnalyticsData] = useState(null);
+const Dashboard = () => {
+  const [counts, setCounts] = useState({
+    status: {
+      todo: 0,
+      inProgress: 0,
+      backlog: 0,
+      done: 0,
+    },
+    priority: {
+      Low: 0,
+      Moderate: 0,
+      High: 0,
+    },
+    overdue: 0,
+  });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.get("/analytics");
-        setAnalyticsData(response.data);
+        const response = await api.get("analytics");
+        setCounts(response.data);
       } catch (error) {
-        console.error("Error fetching analytics data:", error);
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
   }, []);
 
-  if (!analyticsData) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <>
+    <div className={styles.container}>
       <Sidebar />
-      <div className="container">
-        <div className={styles.cards}>
-          <div className={styles.card}>
-            <div className="value">
-              Backlog Tasks: {analyticsData.backlogTasks}
+      <div className={styles.cards}>
+        <div className={styles.card}>
+          <div className={styles.countItem}>
+            <div>
+              <span className={styles.dot}></span> <span>Todo:</span>
             </div>
-            <div className="value">To-do Tasks: {analyticsData.todoTasks}</div>
-            <div className="value">
-              In-Progress Tasks: {analyticsData.inProgressTasks}
-            </div>
-            <div className="value">
-              Completed Tasks: {analyticsData.completedTasks}
-            </div>
+            <h3>{counts.status.todo || 0}</h3>
           </div>
-          <div className={styles.card}>
-            <div className="value">
-              Low Priority Tasks: {analyticsData.lowPriorityTasks}
+          <div className={styles.countItem}>
+            <div>
+              <span className={styles.dot}></span> <span>In Progress:</span>
             </div>
-            <div className="value">
-              Moderate Priority Tasks: {analyticsData.moderatePriorityTasks}
+            <h3>{counts.status.inProgress || 0}</h3>
+          </div>
+          <div className={styles.countItem}>
+            <div>
+              <span className={styles.dot}></span> <span>Backlog:</span>
             </div>
-            <div className="value">
-              High Priority Tasks: {analyticsData.highPriorityTasks}
+            <h3>{counts.status.backlog || 0}</h3>
+          </div>
+          <div className={styles.countItem}>
+            <div>
+              <span className={styles.dot}></span> <span>Done:</span>
             </div>
-            <div className="value">
-              Due Date Tasks: {analyticsData.dueDateTasks}
+            <h3>{counts.status.done || 0}</h3>
+          </div>
+        </div>
+        <div className={styles.card}>
+          <div className={styles.countItem}>
+            {" "}
+            <div>
+              <span className={styles.dot}></span> <span>Low Priority:</span>{" "}
             </div>
+            <h3>{counts.priority["LOW PRIORITY"] || 0}</h3>
+          </div>
+          <div className={styles.countItem}>
+            {" "}
+            <div>
+              <span className={styles.dot}></span>{" "}
+              <span>Moderate Priority:</span>{" "}
+            </div>
+            <h3>{counts.priority["MODERATE PRIORITY"] || 0}</h3>
+          </div>
+          <div className={styles.countItem}>
+            {" "}
+            <div>
+              <span className={styles.dot}></span> <span>High Priority:</span>{" "}
+            </div>
+            <h3>{counts.priority["HIGH PRIORITY"] || 0}</h3>
+          </div>
+          <div className={styles.countItem}>
+            {" "}
+            <div>
+              <span className={styles.dot}></span> <span>Due Date Tasks:</span>{" "}
+            </div>
+            <h3>{counts.dueDate || 0}</h3>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
-}
+};
 
-export default Analytics;
+export default Dashboard;

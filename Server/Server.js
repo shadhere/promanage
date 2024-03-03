@@ -20,6 +20,8 @@ app.use(analytics);
 app.use("/settings", authMiddleware); // Apply authMiddleware only to the /settings route
 app.use("/task", authMiddleware);
 app.use("/tasks", authMiddleware);
+app.use("/analytics", authMiddleware);
+
 app.use(task());
 
 app.get("/api", (req, res) => {
