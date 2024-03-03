@@ -100,7 +100,7 @@ const ModernCard = ({
 
   const handleShare = () => {
     if (carrdId) {
-      const cardLink = `https://promanage-rycy.vercel.app/tasks/${carrdId}
+      const cardLink = `https://promanage-1-5mjl.onrender.com//tasks/${carrdId}
       `; // Construct the link with the dynamic ID
       navigator.clipboard
         .writeText(cardLink)

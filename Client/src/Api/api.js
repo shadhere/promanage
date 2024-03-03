@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://myprojectpromage.vercel.app/",
+  baseURL: "https://promanage-1-5mjl.onrender.com/",
   headers: {
     "Content-Type": "application/json",
   },
